@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div class="h-screen w-screen bg-cover" style="background-image: url('Images/map.jpg')"></div>
+    <div id="nbVisites" class="absolute top-4 right-4">0</div>
+
+    <nav id="menu-nav" class="max-w-[350px] h-screen border-r border-black/10 fixed left-0 top-0 bg-white/80 backdrop-blur z-10" id="Menu">
+        <ul id="Evenements" class="text-left">
+            <li class="mb-10">
+                <a href="/">
+                    <div class="logo-menu h-[180px] bg-grey-500 flex items-center justify-center relative">
+                        <div class="absolute top-0 left-0 w-full h-2 gradient"></div>
+                        <img src="../Images/logo.svg" alt="logo Rennes2">
+                    </div>
+                </a>
+            </li>
+            <li class="group border-y border-black/10" id="Recherche">
+                <button id="btnRecherche" onclick="goRessource()" class="px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                    <div class="leading-4 mb-2 font-bold text-left">
+                        Je cherche une ressource
+                    </div>
+                </button>
+            </li>
+            <li class="group border-b border-black/10" id="Decouverte">
+                <button id="btnDecouverte" onclick="goDecouverte()" class="px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                    <div class="leading-4 mb-2 font-bold text-left">
+                        Je dépose une ressource
+                    </div>
+                </button>
+            </li>
+            <li class="group border-b border-black/10" id="btnEvenements">
+                <button id="btnEvenements" onclick="goEvenements()" class="px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full w-full">
+                    <div class="leading-4 mb-2 font-bold text-left">
+                        Évènements
+                    </div>
+                </button>
+            </li>
+            <li class="group border-b border-black/10">
+                <button id="btnCharte" onclick="goCharte()" class="px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                    <div class="leading-4 mb-2 font-bold text-left">
+                        Charte des tiers-lieux
+                    </div>
+                </button>
+            </li>
+            <li class="absolute bottom-4 left-4" id="Charte">
+                <a href="https://workadventu.re/" target="_blank" class="transition-all block">
+                    <img src="../Images/WA.svg" alt="Logo Workadventu.re" />
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+  <script src="../scripts/accueil.js"></script>
+</body>
+</html>
