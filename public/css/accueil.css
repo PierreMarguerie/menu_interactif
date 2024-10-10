@@ -24,42 +24,18 @@ opacity: 0.8;
     -webkit-filter: brightness(0.5);
 }
 
+#ButtonBox {
+    position: relative;
+    top: 0;
+    left: 40vw;
+    width: 20vw;
+    height: 100px;
+}
+
 #Evenements {
     position: absolute;
     top: 0;
     left: 40vw;
-    width: 20vw;
-    height: 100vh;
-}
-
-#Decouverte {
-    position: absolute;
-    top: 0;
-    left: 20vw;
-    width: 20vw;
-    height: 100vh;
-}
-
-#Recherche {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20vw;
-    height: 100vh;
-}
-
-#Workadventure {
-    position: absolute;
-    top: 0;
-    left: 60vw;
-    width: 20vw;
-    height: 100vh;
-}
-
-#Charte {
-    position: absolute;
-    top: 0;
-    left: 80vw;
     width: 20vw;
     height: 100vh;
 }
@@ -69,13 +45,8 @@ button {
     height: 100%;
     border: none;
     color: white;
-    text-shadow: #353535;
-    background-color: transparent;
     transition: transform 0.3s ease;
-}
-
-#btnWorkAdventure:hover, #btnEvenements:hover, #btnRecherche:hover, #btnDecouverte:hover, #btnCharte:hover {
-background: linear-gradient(to top, #00d6ef, #9e00f3a7, #ca00b671, #eea71a31, rgba(255, 255, 255, 0));
+    background: linear-gradient(to top, #00d6ef, #9e00f3a7, #ca00b671, #eea71a31, rgba(255, 255, 255, 0));
 }
 
 #nbVisites{

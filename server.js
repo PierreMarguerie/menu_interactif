@@ -23,6 +23,9 @@ app.get('/', (req, res) => {
 app.get('/accueil', (req, res) => {
   res.sendFile(path.join(publicPath, '/index/accueil.html'));
 });
+app.get('/ressource', (req, res) => {
+  res.sendFile(path.join(publicPath, '/index/ressource.html'));
+});
 
 // Écouter le serveur sur le port 3000
 app.listen(3000, () => {
