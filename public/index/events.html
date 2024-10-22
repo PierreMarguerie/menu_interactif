@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="h-screen w-screen bg-cover absolute z-10" style="background-image: url('Images/map.jpg')"></div>
+<div class="pl-[370px] pr-[20px] relative z-30">
+    <div class="flex justify-center items-center h-screen w-full text-center">
+        <div class="basis-1/3">
+            <img src="../Images/evts/evt1.png" alt="1">
+        </div>
+        <div class="basis-1/3">
+            <img src="../Images/evts/evt2.png" alt="2">
+        </div>
+        <div class="basis-1/3">
+            <img src="../Images/evts/evt3.png" alt="3">
+        </div>
+    </div>
+</div>
+<nav id="menu-nav" class="max-w-[350px] h-screen border-r border-black/10 fixed left-0 top-0 bg-white/80 backdrop-blur z-30" id="Menu">
+    <ul id="Evenements" class="text-left">
+        <li class="mb-10"> <!-- R2 logo -->
+            <a href="/">
+                <div class="logo-menu w-full bg-grey-500 flex items-center justify-center relative" style="height: 90px;">
+                    <div class="absolute top-0 left-0 w-full h-2 gradient"></div> <!-- Thème de l'ui --> 
+                    <img style="display: flex;padding-top: 50px;" src="../Images/logo.svg" alt="logo Rennes2">
+                </div>
+            </a>
+        </li>
+        <li class="group border-y border-black/10" id="ButtonBox"> <!-- Bouton "je cherche une ressource" -->
+            <a href="/ressource">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Je cherche une ressource
+                </div>
+            </button>
+        </a>
+    </li>
+    <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "je dépose une ressource" -->
+        <a href="/depot">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Je dépose une ressource
+                </div>
+            </button>
+        </a>
+    </li>
+    <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "Évènements" -->
+        <a href="/events">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="absolute top-0 left-0 w-2 h-full gradient-v"></div> <!-- Barre de séléction -->  
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Évènements
+                </div>
+            </button>
+            </a>
+        </li>
+        <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "Charte des tiers-lieux" -->
+            <a href="/charte">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Charte des tiers-lieux
+                </div>
+            </button>
+            </a>
+        </li>
+        <li class="absolute bottom-4 left-4" id="Charte"> <!-- Logo WorkAdventure -->
+            <a href="https://workadventu.re/" target="_blank" class="transition-all block">
+                <img src="../Images/WA.svg" alt="Logo Workadventu.re" />
+            </a>
+        </li>
+    </ul>
+</nav>
+  <script src="../scripts/event.js"></script>
+<script src="../scripts/accueil.js"></script>
+</body>
+</html>

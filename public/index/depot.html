@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/depot.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="h-screen w-screen bg-cover absolute z-10" style="background-image: url('Images/map.jpg')"></div> <!-- Fond (map) -->
+
+<div style="display: inline-flex; top: 8rem; left: 23rem; width: 70vw; height: 73vh;" class="bg-transparent absolute z-30">
+    <div class="items-center rounded-3xl w-full h-full" style="border-radius: 15px;position: relative; background-color: #F5F6F6;">
+        <div class="text-center w-[50vw] pt-[10vh] pl-[22vw]" style="font-size: 0.90vw; font-weight: 700;">
+            <form style="font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 2rem;">
+                <label class="text-left" for="fname">Prénom*</label>
+                <label class="text-left" style="padding-left: 7vw;" for="lname">Nom*</label><br>
+                <input style="width: 10vw;" type="text" id="fname" name="fname" required> <!-- First name box -->
+                <input style="margin-left: 5px;width: 10.5vw;" type="text" id="lname" name="lname" required><br>
+                <span style="line-height: 45px"></span>
+                <label class="text-left" for="email">Email de contact*</label><br>
+                <input style="width: 21.2vw;" type="text" id="email" name="email" required><br> <!-- Email Box -->
+                <span style="line-height: 45px"></span>
+                <label class="text-left" for="language">Langue de la ressource</label>
+                <label style="position: relative;padding-left: 5vw;" class="text-left" for="level">Niveau</label><br>
+                <input style="width: 10vw;" type="text" id="language" name="language" required> <!-- Language of the resource -->
+                <select style="margin-left: 5vw;width: 6vw;height: 2vw;" id="level" name="level" required> <!-- language level selection -->
+                    <option value="" selected disabled hidden>Choisir</option>
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="B1">B1</option>
+                    <option value="B2">B2</option>
+                    <option value="C1">C1</option>
+                    <option value="C2">C2</option>
+                </select><br>
+                <span style="line-height: 45px"></span>
+                <label class="text-left" for="Language_point">Point de langue / Compétence traitée</label><br>
+                <input style="width: 21.2vw;" type="text" id="Language_point" name="Language_point" required><br> <!-- Language_point Box -->
+                <span style="line-height: 45px"></span>
+                <label class="text-left" for="subject_field">Matière / Domaine / Formation</label><br>
+                <input style="width: 21.2vw;" type="text" id="subject_field" name="subject_field" required><br> <!-- subject Box -->
+                <span style="line-height: 45px"></span>
+                <label class="text-left" for="link">Lien URL de la ressource ou lien de téléchargement*</label><br>
+                <input style="width: 25vw;" type="url" id="link" name="link" required><br> <!-- link Box -->
+                <span style="line-height: 45px"></span>
+                <label class="text-left" for="room">Salle de dépôt de la ressource*</label><br>
+                <input style="width: 21.2vw;" type="text" id="room" name="room" required><br> <!-- Room Box -->
+                <input type="radio" id="right" name="right" required>
+                <label for="right">J'ai les droits d'édition de la salle et j'ai déjà ajouté la ressource.</label><br>
+                <input type="radio" id="right" name="right" required>
+                <label for="right">Je demande les droits d'édition.</label><br>
+                <br>
+                <div class="items-center justify-center" style="text-align: center;"> <!-- Bouton de validation -->
+                    <input class="cursor-pointer" type="submit" value="Valider">
+                </div>
+            </form>
+        </div>        
+    </div>
+</div>
+
+<nav id="menu-nav" class="max-w-[350px] h-screen border-r border-black/10 fixed left-0 top-0 bg-white/80 backdrop-blur z-30">
+    <ul id="Evenements" class="text-left">
+        <li class="mb-10"> <!-- R2 logo -->
+            <a href="http://localhost:3000/">
+                <div class="logo-menu w-full bg-grey-500 flex items-center justify-center relative" style="height: 90px;">
+                    <div class="absolute top-0 left-0 w-full h-2 gradient"></div> <!-- Thème de l'ui --> 
+                    <img style="display: flex;padding-top: 50px;" src="../Images/logo.svg" alt="logo Rennes2">
+                </div>
+            </a>
+        </li>
+        <li class="group border-y border-black/10" id="ButtonBox"> <!-- Bouton "je cherche une ressource" -->
+            <a href="http://localhost:3000/ressource">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Je cherche une ressource
+                </div>
+            </button>
+        </a>
+    </li>
+    <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "je dépose une ressource" -->
+        <a href="http://localhost:3000/depot">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="absolute top-0 left-0 w-2 h-full gradient-v"></div> <!-- Barre de séléction -->  
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Je dépose une ressource
+                </div>
+            </button>
+        </a>
+    </li>
+    <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "Évènements" -->
+        <a href="http://localhost:3000/events">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Évènements
+                </div>
+            </button>
+            </a>
+        </li>
+        <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "Charte des tiers-lieux" -->
+            <a href="http://localhost:3000/charte">
+            <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
+                <div class="leading-4 mb-2 font-bold text-left">
+                    Charte des tiers-lieux
+                </div>
+            </button>
+            </a>
+        </li>
+        <li class="absolute bottom-4 left-4" id="Charte"> <!-- Logo WorkAdventure -->
+            <a href="https://workadventu.re/" target="_blank" class="transition-all block">
+                <img src="../Images/WA.svg" alt="Logo Workadventu.re">
+            </a>
+        </li>
+    </ul>
+</nav>
+<script src="../scripts/accueil.js"></script>
+</body></html>

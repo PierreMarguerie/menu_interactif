@@ -2,7 +2,7 @@ const express = require('express');
 const ejs = require('ejs');
 const path = require('path');
 const mariadb = require('mariadb');
-const { ping_db } = require("./public/scripts/connect.js");
+const { ping_db, connect_to_db } = require("./public/scripts/connect.js");
 
 ping_db();
 
@@ -25,6 +25,26 @@ app.get('/accueil', (req, res) => {
 });
 app.get('/ressource', (req, res) => {
   res.sendFile(path.join(publicPath, '/index/ressource.html'));
+});
+app.get('/depot', (req, res) => {
+  res.sendFile(path.join(publicPath, '/index/depot.html'));
+})
+app.get('/events', (req, res) => {
+  res.sendFile(path.join(publicPath, '/index/events.html'));
+});
+app.get('/charte', (req, res) => {
+  res.sendFile(path.join(publicPath, '/index/charte.html'));
+});
+
+// Pour compter le nombre de validation de la charte
+app.get('/utilisateurs/bouton-clique', async (req, res) => {
+  try {
+    const Connection = await connect_to_db();
+    const count = await Connection.countDocuments({ buttonClicked: true });
+    res.json({ count });
+  } catch (error) {
+    console.error('Erreur lors de la récupération du nombre d\'utilisateurs ayant cliqué sur le bouton :', error);
+  }
 });
 
 // Écouter le serveur sur le port 3000
