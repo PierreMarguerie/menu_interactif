@@ -18,3 +18,8 @@ CREATE TABLE IF NOT EXISTS `resources` (
     PRIMARY KEY (id),
     FOREIGN KEY (wa_location) REFERENCES wa_location(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS `accepted` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `count` int
+)
