@@ -3,10 +3,10 @@ const ejs = require('ejs');
 const path = require('path');
 const mariadb = require('mariadb');
 const { ping_db, connect_to_db } = require("./public/scripts/connect.js");
+const dotenv = require("dotenv");
 
 ping_db();
-
-
+dotenv.config();
 
 const app = express();
 app.use(express.static('public'));
@@ -17,6 +17,18 @@ app.use(express.json());
 const publicPath = path.join(__dirname, 'public');
 
 // Définition des routes
+
+const emailjsUserId = process.env.PUBLIC_KEY;
+const emailjsServiceId = process.env.SERVICE_ID;
+const emailjsTemplateId = process.env.TEMPLATE_ID;
+
+app.get('/emailjs-config', (req, res) => {
+  res.json({
+      public_key: emailjsUserId,
+      serviceId: emailjsServiceId,
+      templateId: emailjsTemplateId
+  });
+});
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, '/index/accueil.html'));
 });
@@ -34,6 +46,9 @@ app.get('/events', (req, res) => {
 });
 app.get('/charte', (req, res) => {
   res.sendFile(path.join(publicPath, '/index/charte.html'));
+});
+app.get('/add_admin', (req, res) => {
+  res.sendFile(path.join(publicPath, '/index/add_admin.html'));
 });
 
 // Pour compter le nombre de validation de la charte

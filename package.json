@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
+    "emailjs-com": "^3.2.0",
     "express": "^4.21.0",
     "mariadb": "^3.3.2",
     "mongoose": "^7.3.1",
