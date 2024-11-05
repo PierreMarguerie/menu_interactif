@@ -7,6 +7,12 @@ export async function createUrl(mapName, areaName)
     }
     try {
         url = "https://mondevirtuel.univ-rennes2.fr/@/" + mapName + "#" + encodeURIComponent(areaName);
+        const response = await fetch(url, { method: 'HEAD' });
+
+        if (!response.ok) {
+            console.log("Erreur: Le serveur a renvoyé un statut " + response.status);
+            return window.location.href;
+        }
     } catch (err) {
         console.log("Error has occured when trying to create url to asked resource: ", err);
         return window.location.href;

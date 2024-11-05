@@ -11,46 +11,34 @@
 <div style="display: inline-flex; top: 8rem; left: 23rem; width: 70vw; height: 73vh;" class="bg-transparent absolute z-30">
     <div class="items-center rounded-3xl w-full h-full" style="border-radius: 15px;position: relative; background-color: #F5F6F6;">
         <div class="text-center w-[50vw] pt-[10vh] pl-[22vw]" style="font-size: 0.90vw; font-weight: 700;">
-            <form id="form" style="font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 2rem;">
-                <label class="text-left" for="fname">Prénom*</label>
-                <label class="text-left" style="padding-left: 7vw;" for="lname">Nom*</label><br>
-                <input style="width: 10vw;" type="text" id="fname" name="fname" required> <!-- First name box -->
-                <input style="margin-left: 5px;width: 10.5vw;" type="text" id="lname" name="lname" required><br> <!-- Last name box -->
+            <form id="form" style="font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 3rem;">
+                <label class="text-left" for="resource_name">Nom de la ressource</label><br>
+                <input style="width: 10vw;" type="text" id="resource_name" name="resource_name" required><br> <!-- resource_name box -->
                 <span style="line-height: 45px"></span>
-                <label class="text-left" for="email">Email de contact*</label><br>
-                <input style="width: 21.2vw;" type="text" id="email" name="email" required><br> <!-- Email Box -->
+
+                <label class="text-left" for="link">Lien vers la ressource</label><br>
+                <input style="width: 21.2vw;" type="text" id="link" name="link" required><br> <!-- link Box -->
+
                 <span style="line-height: 45px"></span>
-                <label class="text-left" for="language">Langue de la ressource</label>
-                <label style="position: relative;padding-left: 5vw;" class="text-left" for="level">Niveau</label><br>
-                <input style="width: 10vw;" type="text" id="language" name="language" required> <!-- Language of the resource -->
-                <select style="margin-left: 5vw;width: 6vw;height: 2vw;" id="level" name="level" required> <!-- language level selection -->
-                    <option value="" selected disabled hidden>Choisir</option>
-                    <option value="A1">A1</option>
-                    <option value="A2">A2</option>
-                    <option value="B1">B1</option>
-                    <option value="B2">B2</option>
-                    <option value="C1">C1</option>
-                    <option value="C2">C2</option>
-                </select><br>
+                
+                <label class="text-left" for="areaName">Nom de la zone de la ressource</label><br>
+                <input style="width: 25vw;" type="url" id="areaName" name="areaName" required><br> <!-- areaname Box -->
+                <div style="font-size: 15px; font-weight: 300;">N'oubliez pas d'ajouter la propriété "entryzone" et de ne pas avoir d'espaces</div>
+                
                 <span style="line-height: 45px"></span>
-                <label class="text-left" for="languagePoint">Point de langue / Compétence traitée</label><br>
-                <input style="width: 21.2vw;" type="text" id="languagePoint" name="languagePoint" required><br> <!-- Language_point Box -->
-                <span style="line-height: 45px"></span>
-                <label class="text-left" for="subjectField">Matière / Domaine / Formation</label><br>
-                <input style="width: 21.2vw;" type="text" id="subjectField" name="subjectField" required><br> <!-- subject Box -->
-                <span style="line-height: 45px"></span>
-                <label class="text-left" for="link">Lien URL de la ressource ou lien de téléchargement*</label><br>
-                <input style="width: 25vw;" type="url" id="link" name="link" required><br> <!-- link Box -->
-                <span style="line-height: 45px"></span>
-                <label class="text-left" for="room">Salle de dépôt de la ressource*</label><br>
+                <label class="text-left" for="room">Salle de dépôt de la ressource</label><br>
                 <input style="width: 21.2vw;" type="text" id="room" name="room" required><br> <!-- Room Box -->
-                <input type="radio" id="have" name="right" required>
-                <label for="have">J'ai les droits d'édition de la salle et j'ai déjà ajouté la ressource.</label><br>
-                <input type="radio" id="asks" name="right" required>
-                <label for="asks">Je demande les droits d'édition.</label><br>
                 <br>
+                <div id="drop-area" class="drop-area" style="background-image: url('Images/dragndrop.png')">
+                    <div style="font-size: 15px;">Ajouter une image ici</div>
+                    <div style="position: relative;padding-top: 140px;">
+                        <input type="file" id="fileInput" class="file-input">
+                        <button type="button" class="custom-button">Parcourir</button>
+                    </div>                    
+                    <img id="preview" style="display: none; max-width: 100%; max-height: 100%;"/>
+                </div><br>
                 <div class="items-center justify-center" style="text-align: center;"> <!-- Bouton de validation -->
-                    <input class="cursor-pointer" type="submit" value="Valider">
+                    <input class="cursor-pointer" style="width: 400px" type="submit" value="Ajouter dans la base de données">
                 </div>
             </form>
         </div>
@@ -111,6 +99,54 @@
         </li>
     </ul>
 </nav>
+
+<script type="text/javascript">
+    const dropArea = document.getElementById("drop-area");
+const previewImage = document.getElementById("preview");
+const fileInput = document.getElementById("fileInput");
+
+dropArea.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    dropArea.classList.add("dragover");
+});
+
+dropArea.addEventListener("dragleave", () => {
+    dropArea.classList.remove("dragover");
+});
+
+dropArea.addEventListener("drop", (event) => {
+    event.preventDefault();
+    dropArea.classList.remove("dragover");
+
+    const file = event.dataTransfer.files[0];
+    if (file && file.type.startsWith("image/")) {
+        displayImage(file);
+    } else {
+        alert("Please drop an image file.");
+    }
+});
+
+dropArea.addEventListener("click", () => {
+    fileInput.click();
+});
+
+fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (file && file.type.startsWith("image/")) {
+        displayImage(file);
+    }
+});
+
+function displayImage(file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        previewImage.src = event.target.result;
+        previewImage.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+
 <script type="text/javascript">
     document.getElementById('form').addEventListener('submit', (event) => {
         event.preventDefault();

@@ -10,12 +10,12 @@
 <body>
     <div class="h-screen w-screen bg-cover" style="background-image: url('Images/map.jpg')"></div>
     <div id="nbVisites" class="absolute top-4 right-4">0</div>
-
-    <nav id="menu-nav" class="max-w-[350px] h-screen border-r border-black/10 fixed left-0 top-0 bg-white/80 backdrop-blur z-10" id="Menu">
+    <nav id="menu-nav" class="max-w-[350px] h-screen border-r border-black/10 fixed left-0 top-0 bg-white/80 backdrop-blur z-30" id="Menu">
         <ul id="Evenements" class="text-left">
             <li class="mb-10"> <!-- R2 logo -->
-                    <div class="logo-menu w-full flex items-center justify-center relative bg-transparent" style="height: 90px;">
-                        <div class="absolute top-0 left-0 w-full h-2 gradient"></div> <!-- Thème de l'ui -->
+                <a href="/">
+                    <div class="logo-menu w-full bg-grey-500 flex items-center justify-center relative" style="height: 90px;">
+                        <div class="absolute top-0 left-0 w-full h-2 gradient"></div> <!-- Thème de l'ui --> 
                         <img style="display: flex;padding-top: 50px;" src="../Images/logo.svg" alt="logo Rennes2">
                     </div>
                 </a>
@@ -27,19 +27,19 @@
                         Je cherche une ressource
                     </div>
                 </button>
-                </a>
-            </li>
-            <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "je dépose une ressource" -->
-                <a href="/depot">
+            </a>
+        </li>
+        <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "je dépose une ressource" -->
+            <a href="/depot">
                 <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
                     <div class="leading-4 mb-2 font-bold text-left">
                         Je dépose une ressource
                     </div>
                 </button>
-                </a>
-            </li>
-            <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "Évènements" -->
-                <a href="/events">
+            </a>
+        </li>
+        <li class="group border-b border-black/10" id="ButtonBox"> <!-- Bouton "Évènements" -->
+            <a href="/events">
                 <button class="relative px-4 py-8 hover:bg-black/10 hover:pl-6 transition-all block w-full">
                     <div class="leading-4 mb-2 font-bold text-left">
                         Évènements

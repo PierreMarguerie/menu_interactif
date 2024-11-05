@@ -47,19 +47,6 @@ body {
   color: #fff;
   font-size: 18px;
 }
-  
-.submenu-class {
-    width: 180px;
-    height: 100%;
-    position: absolute;
-    left: 240px;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    top: 0;
-    background-color: rgba(254, 254, 254, 0.8);
-    backdrop-filter: blur(10px);
-    z-index: 30;
-    display: flex;  
-}
 
 button {
   border: none;
