@@ -3,21 +3,64 @@ const ejs = require('ejs');
 const path = require('path');
 const mariadb = require('mariadb');
 const { ping_db, connect_to_db } = require("./public/scripts/connect.js");
+const { insertResource } = require("./public/scripts/insert.js");
 const dotenv = require("dotenv");
+const multer = require('multer');
 const sendMail = require('./public/scripts/sendMail.js');
 
-ping_db();
+ping_db('menu');
 dotenv.config();
 
 const app = express();
 app.use(express.static('public'));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'images/'); // Specify folder to store uploaded files
+  },
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname)); // Make file names unique
+  }
+});
+const upload = multer({ storage: storage });
+
+const fs = require('fs');
+if (!fs.existsSync('images')) {
+    fs.mkdirSync('images');
+}
+app.use('/images', express.static('images'));
 
 // Définir le chemin du répertoire public
 const publicPath = path.join(__dirname, 'public');
 
 // Définition des routes
+
+app.post('/insert', upload.single('image'), async (req, res) => {
+  const { resourceName, link, areaName, room } = req.body;
+  const imageFile = req.file; // This is the file object uploaded by the user
+
+  if (!resourceName || !link || !areaName || !room || !imageFile) {
+      return res.status(400).send('All fields are required.');
+  }
+  try {
+      await insertResource({
+          name: resourceName,
+          link: link,
+          areaName: areaName,
+          room: room,
+          imageFile: imageFile
+      });
+      res.status(200).send('Resource inserted successfully!');
+  } catch (err) {
+      console.error('Error inserting resource:', err);
+      res.status(500).send('Internal server error');
+  }
+});
+
+
 app.post('/send-email', async (req, res) => {
   const formData  = req.body.formData;
   try {
@@ -27,6 +70,16 @@ app.post('/send-email', async (req, res) => {
     res.status(500).send('Error sending email');
   }
 });
+app.post('/send-email', async (req, res) => {
+  const formData  = req.body.formData;
+  try {
+    await sendMail(formData);
+    res.status(200).send('Email sent successfully');
+  } catch (error) {
+    res.status(500).send('Error sending email');
+  }
+});
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, '/index/accueil.html'));
 });

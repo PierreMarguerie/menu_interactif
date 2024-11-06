@@ -12,14 +12,14 @@
     <div class="items-center rounded-3xl w-full h-full" style="border-radius: 15px;position: relative; background-color: #F5F6F6;">
         <div class="text-center w-[50vw] pt-[10vh] pl-[22vw]" style="font-size: 0.90vw; font-weight: 700;">
             <form id="form" style="font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 3rem;">
-                <label class="text-left" for="resource_name">Nom de la ressource</label><br>
-                <input style="width: 10vw;" type="text" id="resource_name" name="resource_name" required><br> <!-- resource_name box -->
+                <label class="text-left" for="resourceName">Nom de la ressource</label><br>
+                <input style="width: 10vw;" type="text" id="resourceName" name="resourceName" required><br> <!-- resource_name box -->
                 <span style="line-height: 45px"></span>
                 <label class="text-left" for="link">Lien vers la ressource</label><br>
                 <input style="width: 21.2vw;" type="text" id="link" name="link" required><br> <!-- link Box -->
                 <span style="line-height: 45px"></span>
                 <label class="text-left" for="areaName">Nom de la zone de la ressource</label><br>
-                <input style="width: 25vw;" type="url" id="areaName" name="areaName" required><br> <!-- areaname Box -->
+                <input style="width: 25vw;" type="text" id="areaName" name="areaName" required><br> <!-- areaName Box -->
                 <div style="font-size: 15px; font-weight: 300;">N'oubliez pas d'ajouter la propriété "zone de départ"</div>
                 <div style="font-size: 15px; font-weight: 300;">Le nom ne doit pas contenir d'espaces.</div>
                 <span style="line-height: 45px"></span>
@@ -96,8 +96,7 @@
         </li>
     </ul>
 </nav>
-
-<script type="text/javascript">
+<script type="text/javascript"> // Drag n drop function
     const dropArea = document.getElementById("drop-area");
 const previewImage = document.getElementById("preview");
 const fileInput = document.getElementById("fileInput");
@@ -143,38 +142,35 @@ function displayImage(file) {
     reader.readAsDataURL(file);
 }
 </script>
-
 <script type="text/javascript">
-    document.getElementById('form').addEventListener('submit', (event) => {
-        event.preventDefault();
-        const formData = {
-            fname: document.getElementById('fname').value,
-            lname: document.getElementById('lname').value,
-            email: document.getElementById('email').value,
-            language: document.getElementById('language').value,
-            level: document.getElementById('level').value,
-            languagePoint: document.getElementById('languagePoint').value,
-            subjectField: document.getElementById('subjectField').value,
-            link: document.getElementById('link').value,
-            room: document.getElementById('room').value,
-            right: document.querySelector('input[name="right"]:checked')?.id,
-        };
-        console.log('Data retrieved:', formData);
-
-        formData.right = formData.right === 'asks' ? 'demande les droits d\'édition de la carte.' : 'possède les droits d\'édition de la carte.'
-        try {
-            fetch('/send-email', {
+    document.getElementById('form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("resourceName", document.getElementById("resourceName").value);
+    formData.append("link", document.getElementById("link").value);
+    formData.append("areaName", document.getElementById("areaName").value);
+    formData.append("room", document.getElementById("room").value);
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput.files.length > 0) {
+        formData.append("image", fileInput.files[0]);
+    } else {
+        alert("Please select an image.");
+        return;
+    }
+    try {
+        const response = await fetch('/insert', {
             method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-            formData: formData,
-            }),
+            body: formData
         });
-        } catch (err) {
-            console.error('Error sending mail:', err);
+        if (response.ok) {
+            alert("Resource added successfully!");
+            console.log("Response:", await response.json());
+        } else {
+            console.error("Failed to upload:", response.statusText);
         }
-      });
+    } catch (err) {
+        console.error("Error inserting data: ", err);
+    }
+});
 </script>
 </body></html>

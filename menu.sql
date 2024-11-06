@@ -1,10 +1,9 @@
-
-
 CREATE DATABASE IF NOT EXISTS `menu`;
+USE `menu`;
 
-CREATE TABLE IF NOT EXISTS `wa_location` (
+CREATE TABLE IF NOT EXISTS `menu.wa_location` (
     `id` int NOT NULL AUTO_INCREMENT,
-    `map` VARCHAR(24) NOT NULL,
+    `room` VARCHAR(24) NOT NULL,
     `areaName` VARCHAR(64) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -15,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `resources` (
     `link` VARCHAR(255),
     `wa_location` INT,
     `tags` varchar(255),
+    `image_data` LONGBLOB NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (wa_location) REFERENCES wa_location(id) ON DELETE CASCADE
 );
@@ -22,4 +22,5 @@ CREATE TABLE IF NOT EXISTS `resources` (
 CREATE TABLE IF NOT EXISTS `accepted` (
     `id` int NOT NULL AUTO_INCREMENT,
     `count` int
+    PRIMARY_KEY (id)
 )
