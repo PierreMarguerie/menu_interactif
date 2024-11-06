@@ -11,7 +11,7 @@
 <div style="display: inline-flex; top: 8rem; left: 23rem; width: 70vw; height: 73vh;" class="bg-transparent absolute z-30">
     <div class="items-center rounded-3xl w-full h-full" style="border-radius: 15px;position: relative; background-color: #F5F6F6;">
         <div class="text-center w-[50vw] pt-[10vh] pl-[22vw]" style="font-size: 0.90vw; font-weight: 700;">
-            <form id="form" style="font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 2rem;">
+            <form id="form" style="font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 2rem;"> <!-- Form div -->
                 <label class="text-left" for="fname">Prénom*</label>
                 <label class="text-left" style="padding-left: 7vw;" for="lname">Nom*</label><br>
                 <input style="width: 10vw;" type="text" id="fname" name="fname" required> <!-- First name box -->
@@ -53,6 +53,12 @@
                     <input class="cursor-pointer" type="submit" value="Valider">
                 </div>
             </form>
+            <div id="success" style="display: none; color: green;">
+                <img src="../Images/checked.png" alt="Requête envoyée avec succès" class="styled-image" onerror="this.classList.add('styled-alt');this.classList.remove('styled-image')">
+            </div>
+            <div id="failed" style="display: none; color: red;">
+                <img src="../Images/cross checked.png" alt="Impossible d'envoyer la requête" class="styled-image" onerror="this.classList.add('styled-alt');this.classList.remove('styled-image')">
+            </div>
         </div>
     </div>
 </div>
@@ -129,19 +135,24 @@
         console.log('Data retrieved:', formData);
 
         formData.right = formData.right === 'asks' ? 'demande les droits d\'édition de la carte.' : 'possède les droits d\'édition de la carte.'
-        try {
-            fetch('/send-email', {
+        fetch('/send-email', {
             method: 'POST',
             headers: {
-            'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-            formData: formData,
+                formData: formData,
             }),
-        });
-        } catch (err) {
+        })
+        .then(function(html) {
+            $('#form').hide();
+            $('#success').show();
+        })
+        .catch(function(err) {
             console.error('Error sending mail:', err);
-        }
+            $('#form').hide();
+            $('#failed').show();
+        });
       });
 </script>
 </body></html>

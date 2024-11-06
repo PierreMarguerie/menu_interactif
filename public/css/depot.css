@@ -34,3 +34,14 @@ select {
   padding-left: 10px;
   border-radius: 10px;
 }
+
+.styled-image {
+  padding-top: 30vh;
+  padding-left: 20vw;
+}
+
+.styled-alt {
+  padding-top: 30vh;
+  padding-left: 5vw;
+  font-size: 60px;
+}

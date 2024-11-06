@@ -1,19 +1,19 @@
-reste à faire: 
+reste à faire:
     --> quand on aura la BDD, faire l'affichage (voir le figma)
 
-    --> page enseignants 80% -> manque la BDD pour l'affichage (20%)
+    --> page enseignants 80%
+        ||>affichage (20%)
 
-    --> page observateur - 80% -> manque la BDD pour l'affichage (20%)
-        ||> projets en cours
-        ||>valorisation de la recherche
-        ||>production étudiantes
+    --> page observateur - 80%
+        ||>affichage (20%)
 
-    --> page étudiant interne, exterieur - 80%  -> manque la BDD pour l'affichage (20%)
+    --> page étudiant interne, exterieur - 80%
+        ||>affichage (20%)
 
     --> pages de choix de ressources: -> manque la BDD pour l'affichage (80%)
         ||>tutoriel
         ||>langue
         ||>Jeux
 
-    --> page "add_admin" pour l'ajout de ressources dans la base de données par un admin 30% -> manque la BDD pour l'ajout dedans...
-        ||> drag & drop feature
+    --> page "add_admin" pour l'ajout de ressources dans la base de données
+        ||> Création du beckend d'ajout et liaison
