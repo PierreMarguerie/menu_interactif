@@ -15,26 +15,23 @@
                 <label class="text-left" for="resource_name">Nom de la ressource</label><br>
                 <input style="width: 10vw;" type="text" id="resource_name" name="resource_name" required><br> <!-- resource_name box -->
                 <span style="line-height: 45px"></span>
-
                 <label class="text-left" for="link">Lien vers la ressource</label><br>
                 <input style="width: 21.2vw;" type="text" id="link" name="link" required><br> <!-- link Box -->
-
                 <span style="line-height: 45px"></span>
-                
                 <label class="text-left" for="areaName">Nom de la zone de la ressource</label><br>
                 <input style="width: 25vw;" type="url" id="areaName" name="areaName" required><br> <!-- areaname Box -->
-                <div style="font-size: 15px; font-weight: 300;">N'oubliez pas d'ajouter la propriété "entryzone" et de ne pas avoir d'espaces</div>
-                
+                <div style="font-size: 15px; font-weight: 300;">N'oubliez pas d'ajouter la propriété "zone de départ"</div>
+                <div style="font-size: 15px; font-weight: 300;">Le nom ne doit pas contenir d'espaces.</div>
                 <span style="line-height: 45px"></span>
                 <label class="text-left" for="room">Salle de dépôt de la ressource</label><br>
                 <input style="width: 21.2vw;" type="text" id="room" name="room" required><br> <!-- Room Box -->
                 <br>
                 <div id="drop-area" class="drop-area" style="background-image: url('Images/dragndrop.png')">
-                    <div style="font-size: 15px;">Ajouter une image ici</div>
+                    <div style="font-size: 15px;">Capture d'écran de la zone</div>
                     <div style="position: relative;padding-top: 140px;">
                         <input type="file" id="fileInput" class="file-input">
                         <button type="button" class="custom-button">Parcourir</button>
-                    </div>                    
+                    </div>
                     <img id="preview" style="display: none; max-width: 100%; max-height: 100%;"/>
                 </div><br>
                 <div class="items-center justify-center" style="text-align: center;"> <!-- Bouton de validation -->
@@ -50,7 +47,7 @@
         <li class="mb-10"> <!-- R2 logo -->
             <a href="/">
                 <div class="logo-menu w-full bg-grey-500 flex items-center justify-center relative" style="height: 90px;">
-                    <div class="absolute top-0 left-0 w-full h-2 gradient"></div> <!-- Thème de l'ui --> 
+                    <div class="absolute top-0 left-0 w-full h-2 gradient"></div> <!-- Thème de l'ui -->
                     <img style="display: flex;padding-top: 50px;" src="../Images/logo.svg" alt="logo Rennes2">
                 </div>
             </a>
