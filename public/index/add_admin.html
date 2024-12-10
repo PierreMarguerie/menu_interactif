@@ -26,14 +26,15 @@
                 <label class="text-left" for="room">Salle de dépôt de la ressource</label><br>
                 <input style="width: 21.2vw;" type="text" id="room" name="room" required><br> <!-- Room Box -->
                 <br>
-                <div id="drop-area" class="drop-area" style="background-image: url('Images/dragndrop.png')">
-                    <div style="font-size: 15px;">Capture d'écran de la zone</div>
-                    <div style="position: relative;padding-top: 140px;">
-                        <input type="file" id="fileInput" class="file-input">
-                        <button type="button" class="custom-button">Parcourir</button>
+                <div id="drop-area" class="drop-area" style="position: relative; background-image: url('Images/dragndrop.png');">
+                    <div style="font-size: 15px; z-index: 2; position: relative;">Capture d'écran de la zone</div>
+                    <div style="position: relative; padding-top: 140px; z-index: 2;">
+                        <input type="file" id="fileInput" class="file-input" style="z-index: 2; position: absolute;">
+                        <button type="button" class="custom-button" style="z-index: 2; position: relative;">Parcourir</button>
                     </div>
-                    <img id="preview" style="display: none; max-width: 100%; max-height: 100%;"/>
-                </div><br>
+                    <img id="preview" style="position: absolute; top: 50%; left: 50%; display: none; z-index: 1; max-width: 80%; max-height: 80%; transform: translate(-50%, -50%);" />
+                </div>
+                <br>
                 <div class="items-center justify-center" style="text-align: center;"> <!-- Bouton de validation -->
                     <input class="cursor-pointer" style="width: 400px" type="submit" value="Ajouter dans la base de données">
                 </div>
@@ -138,6 +139,7 @@ function displayImage(file) {
     reader.onload = (event) => {
         previewImage.src = event.target.result;
         previewImage.style.display = "block";
+        dropArea.style.backgroundImage = "none";
     };
     reader.readAsDataURL(file);
 }

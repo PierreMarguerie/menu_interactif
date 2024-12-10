@@ -3,13 +3,14 @@ mariadb = require('mariadb');
 async function ping_db(database) {
     let conn;
     try {
+        require('dotenv').config();
         // Create a new connection
         conn = await mariadb.createConnection({
-            host: '127.0.0.1', //adress of the mariadb server
-            port: '3306', // port on wich the mariadb server is listening on
-            user: 'user', // username on the mariadb server
-            password: 'password', // password on the mariadb server
-            database: database // database name on the mariadb server
+            host: process.env.DB_HOST, // Adresse du serveur MariaDB
+            port: process.env.DB_PORT, // Port du serveur MariaDB
+            user: process.env.DB_USER, // Nom d'utilisateur
+            password: process.env.DB_PASSWORD, // Mot de passe
+            database: process.env.DB_NAME, // Nom de la base de données
         });
         // Print connection thread
         console.log(`Database online.`);

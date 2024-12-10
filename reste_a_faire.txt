@@ -16,4 +16,10 @@ reste à faire:
         ||>Jeux
 
     --> page "add_admin" pour l'ajout de ressources dans la base de données
-        ||> Création du beckend d'ajout et liaison
+        ||> Création du beckend d'ajout et liaison 100%
+        ||> Création de la page de retrait de ressources 0%
+
+
+En clair:
+    -> algorithme d'affichage de toutes les ressources
+    -> Page de retrait de ressources
