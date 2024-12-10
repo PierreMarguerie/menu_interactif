@@ -39,6 +39,7 @@
                     <input class="cursor-pointer" style="width: 400px" type="submit" value="Ajouter dans la base de données">
                 </div>
             </form>
+            <img id="response" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         </div>
     </div>
 </div>
@@ -144,7 +145,7 @@ function displayImage(file) {
     reader.readAsDataURL(file);
 }
 </script>
-<script type="text/javascript">
+<script type="text/javascript"> // Form informations sending
     document.getElementById('form').addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -165,9 +166,21 @@ function displayImage(file) {
             body: formData
         });
         if (response.ok) {
+            const form = document.getElementById("form");
+            const img = document.getElementById("response");
+            console.log("after Getting all const");
+            img.style.display = "block";
+            img.src = "Images/ok.png";
+            form.style.display = "none";
             alert("Resource added successfully!");
             console.log("Response:", await response.json());
         } else {
+            alert("Couldn't insert resource!");
+            const form = document.getElementById("form");
+            const img = document.getElementById("response");
+            img.style.display = "block";
+            img.src = url("Images/ok.png")
+            form.style.display = "none";
             console.error("Failed to upload:", response.statusText);
         }
     } catch (err) {
