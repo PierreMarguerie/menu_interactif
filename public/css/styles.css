@@ -1247,12 +1247,51 @@ button[disabled] {
   cursor: pointer;
 }
 
+#link_del {
+  align-items: center;
+  font-size: 0.90vw;
+  display: inline-block;
+  text-align: left;
+  padding-left: 18vw;
+  padding-top: 3rem;
+}
+
+#name_del {
+  font-size: 0.90vw;
+  display: inline-flex;
+  flex-direction: column;
+  text-align: left;
+  padding-left: 18vw;
+  padding-top: 3rem;
+}
+
+.itemContainer {
+  display: inline-flex;
+  width: 75vw;
+  border-radius: 5px;
+  border-width: 5px;
+  border-color: whitesmoke;
+}
+
+.itemImage {
+  width: 10vw;
+  height: 10vw;
+  display: inline-block;
+  margin-left: 15px;
+  margin-top: 15px;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: black;
+}
+
 .custom-button {
-  padding: 0.25rem 1rem;
-  background-color: #007BFF;
+  background-color: red;
   color: white;
   border: none;
+  width: 10vw;
+  padding: 0.25rem 1rem;
   cursor: pointer;
+  font-weight: 700;
   font-size: 1rem;
   border-radius: 10px;
 }

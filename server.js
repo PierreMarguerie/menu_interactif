@@ -4,6 +4,8 @@ const path = require('path');
 const mariadb = require('mariadb');
 const { ping_db, connect_to_db } = require("./public/scripts/connect.js");
 const { insertResource } = require("./public/scripts/insert.js");
+const { getByLink } = require("./public/scripts/getResourceByLink.js");
+const { deleteById } = require("./public/scripts/deleteById.js");
 const dotenv = require("dotenv");
 const multer = require('multer');
 const sendMail = require('./public/scripts/sendMail.js');
@@ -38,7 +40,7 @@ const publicPath = path.join(__dirname, 'public');
 
 // Définition des routes
 
-app.post('/insert', upload.single('image'), async (req, res) => {
+app.post('/insert', upload.single('image'), async (req, res) => { // Insertion d'une ressource dans la BDD
   const { resourceName, link, areaName, room } = req.body;
   const imageFile = req.file; // This is the file object uploaded by the user
 
@@ -60,16 +62,38 @@ app.post('/insert', upload.single('image'), async (req, res) => {
   }
 });
 
-
-app.post('/send-email', async (req, res) => {
-  const formData  = req.body.formData;
+app.post('/getByLink', async (req, res) => { // Recherche d'une ressource dans la BDD par lien
+  const { link } = req.body;
+  console.log("BODY: ", link);
   try {
-    await sendMail(formData);
-    res.status(200).send('Email sent successfully');
-  } catch (error) {
-    res.status(500).send('Error sending email');
+      const resource = await getByLink(link);
+
+      if (!resource) {
+        return res.status(404).send('Resource not found.');
+      }
+
+      console.log("Retour de fonction", resource);
+      resource.image_data = resource.image_data.toString('base64');
+      res.json(resource);
+  } catch (err) {
+      console.error('Error searching resource:', err);
+      res.status(500).send('Internal server error');
   }
 });
+
+app.post('/deleteById', async (req, res) => { // Suppression d'une ressource dans la BDD par id
+  const { id } = req.body;
+  console.log("BODY: ", id);
+  try {
+    const reponse = await deleteById(id);
+    if (reponse != 84)
+      res.status(200).send("Ressource supprimée avec succès.");
+  } catch (err) {
+    console.error('Error deleting resource:', err);
+    res.status(500).send('Internal server error');
+  }
+});
+
 app.post('/send-email', async (req, res) => {
   const formData  = req.body.formData;
   try {
@@ -115,6 +139,9 @@ app.get('/enseignant', (req, res) => {
 });
 app.get('/add_admin', (req, res) => {
   res.sendFile(path.join(publicPath, '/index/add_admin.html'));
+});
+app.get('/del_admin', (req, res) => {
+  res.sendFile(path.join(publicPath, '/index/remove.html'));
 });
 
 // Pour compter le nombre de validation de la charte
