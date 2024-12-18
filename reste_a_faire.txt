@@ -15,11 +15,7 @@ reste à faire:
         ||>langue
         ||>Jeux
 
-    --> page "add_admin" pour l'ajout de ressources dans la base de données
-        ||> Création du beckend d'ajout et liaison 100%
-        ||> Création de la page de retrait de ressources 0%
-
-
 En clair:
     -> algorithme d'affichage de toutes les ressources
-    -> Page de retrait de ressources
+    -> Ajout de la possibilité de drag&drop une affiche (faire en page admin pour la sécurité)
+    -> Rédiger le livre d'or des accès

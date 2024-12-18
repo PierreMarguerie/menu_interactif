@@ -11,20 +11,20 @@
 <div style="display: inline-flex; top: 8rem; left: 23rem; width: 70vw; height: 73vh;" class="bg-transparent absolute z-30">
     <div class="items-center rounded-3xl w-full h-full" style="border-radius: 15px;position: relative; background-color: #F5F6F6;">
         <div class="text-center w-[50vw] pt-[10vh] pl-[22vw]" style="font-size: 0.90vw; font-weight: 700;">
-            <form id="form" style="font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 3rem;">
+            <form id="form" style="position: relative; font-size: 0.90vw;display: inline-block; text-align: left; padding-top: 3rem;">
                 <label class="text-left" for="resourceName">Nom de la ressource</label><br>
-                <input style="width: 10vw;" type="text" id="resourceName" name="resourceName" required><br> <!-- resource_name box -->
+                <input style="width: 10vw;" type="text" id="resourceName" name="resourceName" required placeholder="exemple: Transport"><br> <!-- resource_name box -->
                 <span style="line-height: 45px"></span>
                 <label class="text-left" for="link">Lien vers la ressource</label><br>
-                <input style="width: 21.2vw;" type="text" id="link" name="link" required><br> <!-- link Box -->
+                <input style="width: 21.2vw;" type="text" id="link" name="link" required placeholder="exemple: workadventu.re"><br> <!-- link Box -->
                 <span style="line-height: 45px"></span>
                 <label class="text-left" for="areaName">Nom de la zone de la ressource</label><br>
-                <input style="width: 25vw;" type="text" id="areaName" name="areaName" required><br> <!-- areaName Box -->
+                <input style="width: 25vw;" type="text" id="areaName" name="areaName" required placeholder="exemple: transport"><br> <!-- areaName Box -->
                 <div style="font-size: 15px; font-weight: 300;">N'oubliez pas d'ajouter la propriété "zone de départ"</div>
                 <div style="font-size: 15px; font-weight: 300;">Le nom ne doit pas contenir d'espaces.</div>
                 <span style="line-height: 45px"></span>
                 <label class="text-left" for="room">Salle de dépôt de la ressource</label><br>
-                <input style="width: 21.2vw;" type="text" id="room" name="room" required><br> <!-- Room Box -->
+                <input style="width: 21.2vw;" type="text" id="room" name="room" required placeholder="tout ce qu'il y a après /@/"><br> <!-- Room Box -->
                 <br>
                 <div id="drop-area" class="drop-area" style="position: relative; background-image: url('Images/dragndrop.png');">
                     <div style="font-size: 15px; z-index: 2; position: relative;">Capture d'écran de la zone</div>
@@ -34,6 +34,8 @@
                     </div>
                     <img id="preview" style="position: absolute; top: 50%; left: 50%; display: none; z-index: 1; max-width: 80%; max-height: 80%; transform: translate(-50%, -50%);" />
                 </div>
+                <label class="text-left" style="position: absolute; left: 17vw; top: 55%; width: 20vw;" for="tags">Public cible et tags</label><br>
+                <input style="position: absolute; left: 17vw; top: 58%; width: 21.2vw;" type="text" id="tags" name="tags" required placeholder="exemple: étudiants externes; tutoriel"><br> <!-- Tags Box -->
                 <br>
                 <div class="items-center justify-center" style="text-align: center;"> <!-- Bouton de validation -->
                     <input class="cursor-pointer" style="width: 400px" type="submit" value="Ajouter dans la base de données">
@@ -118,6 +120,7 @@ dropArea.addEventListener("drop", (event) => {
 
     const file = event.dataTransfer.files[0];
     if (file && file.type.startsWith("image/")) {
+        fileInput.files[0] = file;
         displayImage(file);
     } else {
         alert("Please drop an image file.");
@@ -131,6 +134,7 @@ dropArea.addEventListener("click", () => {
 fileInput.addEventListener("change", () => {
     const file = fileInput.files[0];
     if (file && file.type.startsWith("image/")) {
+        fileInput.files[0] = file;
         displayImage(file);
     }
 });
@@ -153,9 +157,11 @@ function displayImage(file) {
     formData.append("link", document.getElementById("link").value);
     formData.append("areaName", document.getElementById("areaName").value);
     formData.append("room", document.getElementById("room").value);
+    formData.append("tags", document.getElementById("tags").value);
     const fileInput = document.getElementById("fileInput");
     if (fileInput.files.length > 0) {
         formData.append("image", fileInput.files[0]);
+        console.log(fileInput.files[0]);
     } else {
         alert("Please select an image.");
         return;

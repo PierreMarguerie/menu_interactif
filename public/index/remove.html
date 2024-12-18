@@ -166,7 +166,7 @@
             "Content-Type": "application/json",
         }
     });
-    if (response.ok)
+    if (response.ok & id > 0)
         alert("La ressource n°" + id + " à été supprimée de la Base de données.");
     else
         alert("Cette ressource n'existe pas.");
@@ -182,7 +182,7 @@
             "Content-Type": "application/json",
         }
     });
-    if (response.ok)
+    if (response.ok & id > 0)
         alert("La ressource n°" + id + " à été supprimée de la Base de données.");
     else
         alert("Cette ressource n'existe pas.");

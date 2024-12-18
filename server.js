@@ -42,10 +42,10 @@ const publicPath = path.join(__dirname, 'public');
 // Définition des routes
 
 app.post('/insert', upload.single('image'), async (req, res) => { // Insertion d'une ressource dans la BDD
-  const { resourceName, link, areaName, room } = req.body;
+  const { resourceName, link, areaName, room, tags } = req.body;
   const imageFile = req.file; // This is the file object uploaded by the user
 
-  if (!resourceName || !link || !areaName || !room || !imageFile) {
+  if (!resourceName || !link || !areaName || !room || !imageFile || !tags) {
       return res.status(400).send('All fields are required.');
   }
   try {
@@ -54,6 +54,7 @@ app.post('/insert', upload.single('image'), async (req, res) => { // Insertion d
           link: link,
           area: areaName,
           map: room,
+          tags: tags,
           imageFile: imageFile
       });
       res.status(200).send('Resource inserted successfully!');

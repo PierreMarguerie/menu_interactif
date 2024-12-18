@@ -1220,7 +1220,7 @@ button[disabled] {
   background-color: rgba(254, 254, 254, 0.8);
   backdrop-filter: blur(10px);
   z-index: 30;
-  display: flex;  
+  display: flex;
 }
 
 .drop-area {
