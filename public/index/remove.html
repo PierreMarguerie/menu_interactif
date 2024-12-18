@@ -15,7 +15,7 @@
             <input style="width: 21.2vw;" type="text" id="link" name="link" required placeholder="https://bit.ly/exemple"><br> <!-- link Box -->
             <br>
             <img class="itemImage" id="linkImg" style="margin-top: 5px; margin-left: 6vw;" src="../Images/empty.png" alt="No map founded."><br>
-            <span style="margin-top: 10px; margin-left: 5.5vw;">Aucune ressource trouvée.</span><br>
+            <span id="resultTextL" style="margin-top: 10px; margin-left: 5.5vw;">Aucune ressource trouvée.</span><br>
             <br>
             <button type="submit" class="custom-button" style="margin-left: 6vw;">Supprimer</button> <!-- Supprimer bouton -->
     </form>
@@ -28,7 +28,7 @@
         <br>
         <button type="submit" class="custom-button" style="position: absolute; margin-top: 10%; margin-left: 40%;">Supprimer</button> <!-- Supprimer bouton -->
         <img class="itemImage" id="nameImg" style="position: absolute; margin-top: -90px; margin-left: 40%" src="../Images/empty.png" alt="No map founded."><br>
-        <span style="position: absolute; margin-top: 8%; margin-left: 39%">Aucune ressource trouvée.</span><br>
+        <span style="position: absolute; margin-top: 8%; margin-left: 39%" id="resultTextN">Aucune ressource trouvée.</span><br>
     </form>
 </div>
 </div>
@@ -108,8 +108,10 @@
                 console.log("Ressource avec l'ID %d a été trouvée.", resource.id);
                 img.src = `data:image/png;base64,${resource.image_data}`;
                 img.alt = "Image de la carte";
+                document.getElementById("resultTextL").textContent = `Ressource "${resource.name}" trouvée.`
                 return resource.id;
             } else {
+                const img = document.getElementById("linkImg");
                 img.src = "../Images/empty.png";
                 img.alt = "no map found";
                 console.log("La ressource ", link, "n'as pas été trouvée.")
@@ -120,34 +122,59 @@
             return 0;
         }
     }
-    async function searchName(mapName, name) {
-        let link = link_del.value;
-        const response = await fetch('/getByLink', {
+    async function searchName() { // fonction de recherche de ressource par noms
+        mapName = mapName_del.value;
+        name = name_del.value;
+        const response = await fetch('/getByNames', {
                 method: 'POST',
-                body: '{"link": ' + '"' + link + '"' + '}',
+                body: JSON.stringify({
+                    mapName: mapName,
+                    name: name
+                }),
                 headers: {
                     "Content-Type": "application/json",
                 }
             });
-        if (response.ok()) {
-            const resp = await response.json();
-            await fetch('/deleteByID', {
-                method: 'POST',
-                body: '{"id": ' + '"' + resp.id + '"' + '}',
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
+        if (response.ok) {
+            const resource = await response.json();
+            const img = document.getElementById("nameImg");
+            console.log("Ressource avec l'ID %d a été trouvée.", resource.id);
+            img.src = `data:image/png;base64,${resource.image_data}`;
+            img.alt = "Image de la carte";
+            document.getElementById("resultTextN").textContent = `Ressource "${resource.name}" trouvée sur ${resource.map}.`
+            return resource.id;
         } else {
-            alert("Cette ressource n'existe pas: ", link);
+            const img = document.getElementById("nameImg");
+            img.src = "../Images/empty.png";
+            img.alt = "no map found";
+            document.getElementById("resultTextN").textContent = `Aucune ressource trouvée.`;
+            console.log("La ressource ", name, "n'est pas sur %s.", mapName);
+            return 0;
         }
     }
 
     link_del.addEventListener("input", searchLink);
     name_del.addEventListener("input", searchName);
+    mapName_del.addEventListener("input", searchName);
     const link_form = document.getElementById("link_del").addEventListener('submit', async (event) => {
     event.preventDefault();
     const id = await searchLink();
+    const response = await fetch('/deleteByID', {
+        method: 'POST',
+        body: '{"id": ' + '"' + id + '"' + '}',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    if (response.ok)
+        alert("La ressource n°" + id + " à été supprimée de la Base de données.");
+    else
+        alert("Cette ressource n'existe pas.");
+    });
+
+    document.getElementById("name_del").addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const id = await searchName();
     const response = await fetch('/deleteByID', {
         method: 'POST',
         body: '{"id": ' + '"' + id + '"' + '}',

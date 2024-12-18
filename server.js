@@ -5,6 +5,7 @@ const mariadb = require('mariadb');
 const { ping_db, connect_to_db } = require("./public/scripts/connect.js");
 const { insertResource } = require("./public/scripts/insert.js");
 const { getByLink } = require("./public/scripts/getResourceByLink.js");
+const { getResourceByNames} = require("./public/scripts/getResourceByNames.js")
 const { deleteById } = require("./public/scripts/deleteById.js");
 const dotenv = require("dotenv");
 const multer = require('multer');
@@ -51,8 +52,8 @@ app.post('/insert', upload.single('image'), async (req, res) => { // Insertion d
       await insertResource({
           name: resourceName,
           link: link,
-          areaName: areaName,
-          room: room,
+          area: areaName,
+          map: room,
           imageFile: imageFile
       });
       res.status(200).send('Resource inserted successfully!');
@@ -75,6 +76,25 @@ app.post('/getByLink', async (req, res) => { // Recherche d'une ressource dans l
       console.log("Retour de fonction", resource);
       resource.image_data = resource.image_data.toString('base64');
       res.json(resource);
+  } catch (err) {
+      console.error('Error searching resource:', err);
+      res.status(500).send('Internal server error');
+  }
+});
+
+app.post('/getByNames', async (req, res) => {
+  const {mapName, name} = req.body;
+  console.log("BODY: ", mapName, name);
+  try {
+    const resource = await getResourceByNames(mapName, name);
+
+    if (!resource) {
+      return res.status(404).send('Resource not found.');
+    }
+
+    console.log("Retour de fonction", resource);
+    resource.image_data = resource.image_data.toString('base64');
+    res.json(resource);
   } catch (err) {
       console.error('Error searching resource:', err);
       res.status(500).send('Internal server error');
