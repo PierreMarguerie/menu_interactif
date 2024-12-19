@@ -1213,7 +1213,7 @@ button[disabled] {
 .submenu-class {
   width: 180px;
   height: 100%;
-  position: absolute;
+  position: fixed;
   left: 300px;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   top: 0;
@@ -1266,19 +1266,34 @@ button[disabled] {
 }
 
 .itemContainer {
-  display: inline-flex;
-  width: 75vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Dynamically fit items */
+  gap: 10px;
+  position: absolute;
+  left: 550px;
+  top: 70px;
+  width: 70vw;
   border-radius: 5px;
-  border-width: 5px;
-  border-color: whitesmoke;
+  border-color: 5px solid whitesmoke;
+}
+
+.item {
+  width: 15%;
+  max-height: 230px;
+  height: auto;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Alef";
+  text-align: center;
+  margin-top: 15px;
+  margin-left: 15px;
+  cursor: pointer;
 }
 
 .itemImage {
-  width: 10vw;
-  height: 10vw;
+  max-width: 100%;
+  height: auto;
   display: inline-block;
-  margin-left: 15px;
-  margin-top: 15px;
   border-radius: 5px;
   border-width: 3px;
   border-color: black;
@@ -1298,4 +1313,36 @@ button[disabled] {
 
 .custom-button:hover {
   background-color: #0056b3;
+}
+
+.submenuButton {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-weight: bold;
+  text-align: left;
+  line-height: 1rem;
+  width: 100%;
+  height: 100%;
+  transition: all 0.2s;
+}
+
+.submenuButton:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding-left: 1.5rem;
+}
+
+.submenuButton:active {
+  color: #ffffff; /* Couleur du texte pour le bouton actif */
+  background: linear-gradient(to right, #00e3ef, #9d0df3);
+}
+
+.subList {
+  position: relative; /* Corresponds to 'relative' */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Corresponds to 'border-b border-black/10' */
+  width: 180px;
+  height: 44px;
 }
